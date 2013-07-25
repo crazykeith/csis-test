@@ -16,7 +16,8 @@ $( "#upload" ).dialog({
                 var id = $('#checkout-id').val();
                 var form_data = new FormData(document.getElementById('upload-form'));
                 var upload_query = "<?php
-                    echo sanitizeHTML(BASE_URL . '/inventory/inventoryAJAX.php?action=upload');?>";
+                    echo sanitizeHTML(BASE_URL
+                        . '/inventory/inventoryAJAX.php?action=upload');?>";
                 $.ajax({
                     url: upload_query,
                     data: form_data,
@@ -27,7 +28,8 @@ $( "#upload" ).dialog({
                     success: function (data) {
                         if (data == false || data == null) {
                             $("#upload-errors").text(
-                                '* A Problem has occured, please refresh the page to continue.'
+                                '* A Problem has occured,'
+                                +'please refresh the page to continue.'
                             ).show();
                         } else if (data === "Your file has been uploaded to the server."){
                             $('#file').val('');
