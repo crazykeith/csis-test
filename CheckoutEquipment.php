@@ -4,8 +4,10 @@ class CheckoutEquipment extends DBQueries
     public $record_count;
 
     function getActiveCheckoutJTable($sort, $start, $page_size) {
-        $sql = "SELECT * FROM Buildings,Rooms,CheckoutEquipment WHERE Buildings.id = Rooms.building_id
-                AND Rooms.id = CheckoutEquipment.room_id AND CheckoutEquipment.status = 'New'
+        $sql = "SELECT * FROM Buildings,Rooms,CheckoutEquipment
+                WHERE Buildings.id = Rooms.building_id
+                AND Rooms.id = CheckoutEquipment.room_id
+                AND CheckoutEquipment.status = 'New'
                 ORDER BY %s LIMIT %d, %d";
         $sql = sprintf($sql, $sort, $start, $page_size);
         $this->records = $this->selectQuery($sql,"");
@@ -14,8 +16,10 @@ class CheckoutEquipment extends DBQueries
         return $this->records;
     }
     function getCompletedCheckoutJTable($sort, $start, $page_size) {
-        $sql = "SELECT * FROM Buildings,Rooms,CheckoutEquipment WHERE Buildings.id = Rooms.building_id
-                AND Rooms.id = CheckoutEquipment.room_id AND CheckoutEquipment.status = 'Completed'
+        $sql = "SELECT * FROM Buildings,Rooms,CheckoutEquipment
+                WHERE Buildings.id = Rooms.building_id
+                AND Rooms.id = CheckoutEquipment.room_id
+                AND CheckoutEquipment.status = 'Completed'
                 ORDER BY %s LIMIT %d, %d";
         $sql = sprintf($sql, $sort, $start, $page_size);
         $this->records = $this->selectQuery($sql,"");
@@ -33,16 +37,20 @@ class CheckoutEquipment extends DBQueries
         $search = array(
             'status' => $status
         );
-        $sql = "SELECT COUNT(*) as num_records FROM CheckoutEquipment WHERE CheckoutEquipment.status = :status";
+        $sql = "SELECT COUNT(*) as num_records FROM CheckoutEquipment
+                WHERE CheckoutEquipment.status = :status";
         $this->record_count = $this->selectQuery($sql,$search);
     }
     function changeCheckoutRecord($changes) {
         if (isset($changes['id'])) {
-            $sql = "UPDATE CheckoutEquipment SET name = :name, email = :email, date_checked_out = :date_checked_out
-                , return_date = :return_date, room_id = :room_id, status = :status WHERE id = :id";
+            $sql = "UPDATE CheckoutEquipment SET name = :name, email = :email,
+                    date_checked_out = :date_checked_out, return_date = :return_date,
+                    room_id = :room_id, status = :status WHERE id = :id";
         } else {
-            $sql = "INSERT INTO CheckoutEquipment (name, email, date_checked_out, return_date, room_id, status)
-                VALUES (:name, :email, :date_checked_out, :return_date, :room_id, 'New')";
+            $sql = "INSERT INTO CheckoutEquipment (name, email, date_checked_out,
+                    return_date, room_id, status)
+                    VALUES (:name, :email, :date_checked_out, :return_date,
+                    :room_id, 'New')";
         }
         $success = $this->insertUpdateDeleteQuery($sql,$changes);
 
