@@ -27,7 +27,8 @@ class CheckoutEquipment extends DBQueries
         if (isset($this->records['room_id'])) {
             $room_class = new Room($this->records['room_id']);
 
-            $this->records['full_room'] = $room_class->prefix . " " . $room_class->room;
+            $this->records['full_room'] = $room_class->prefix . " "
+                                        . $room_class->room;
         }
         $this->getCheckoutCount('Completed');
 
@@ -43,12 +44,13 @@ class CheckoutEquipment extends DBQueries
     }
     function changeCheckoutRecord($changes) {
         if (isset($changes['id'])) {
-            $sql = "UPDATE CheckoutEquipment SET name = :name, email = :email,
-                    date_checked_out = :date_checked_out, return_date = :return_date,
-                    room_id = :room_id, status = :status WHERE id = :id";
+            $sql = "UPDATE CheckoutEquipment SET name = :name,
+                    email = :email, date_checked_out = :date_checked_out,
+                    return_date = :return_date, room_id = :room_id,
+                    status = :status WHERE id = :id";
         } else {
-            $sql = "INSERT INTO CheckoutEquipment (name, email, date_checked_out,
-                    return_date, room_id, status)
+            $sql = "INSERT INTO CheckoutEquipment (name, email,
+                    date_checked_out,return_date, room_id, status)
                     VALUES (:name, :email, :date_checked_out, :return_date,
                     :room_id, 'New')";
         }
