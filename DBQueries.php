@@ -4,7 +4,7 @@ class DBQueries
 
 	protected function selectQuery($sql,$search) {
 	
-	/* DBQueries->selectQuery($sql,$search)
+		/* DBQueries->selectQuery($sql,$search)
 		* Description:
 		*   Base function for selected data from the database.
 		* Parameters:
@@ -48,7 +48,7 @@ class DBQueries
 	}
 	protected function insertUpdateDeleteQuery($sql,$changes) {
 	
-	/* DBQueries->insertUpdateDeleteQuery($sql,$changes)
+		/* DBQueries->insertUpdateDeleteQuery($sql,$changes)
 		* Description:
 		*   Base function for inserting, updating, or
 		*	deleting data from the database.
