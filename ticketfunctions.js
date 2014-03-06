@@ -1,5 +1,6 @@
 // getActiveTickets counts the number of tickets on the page, then checks the server
-// to see if they match. If they do, nothing happens, if they don't, the page reloads.
+// to see if they match. If they do, nothing happens, if they don't, the page 
+// reloads.
 function getActiveTickets() {
     $.post("<?php echo sanitizeHTML(BASE_URL);?>/tickets/ticketAJAX.php",{
         type: "get_active_ticket_count"
@@ -19,8 +20,9 @@ function getTicketInfo(ticket_id) {
     $("#appt").hide();
     $("#apptDate").val('');
     $("#apptTime").val('');
-    $.getJSON("<?php echo sanitizeHTML(BASE_URL);?>/tickets/ticketAJAX.php?ticket_id="
-            +ticket_id+"&type=get_ticket",
+    $.getJSON(
+        "<?phpecho sanitizeHTML(BASE_URL);?>/tickets/ticketAJAX.php?ticket_id="
+        +ticket_id+"&type=get_ticket",
         function(json){
             var i=0;
             var edit_priority_tag = '#edit-priority-'+json.priority;
@@ -45,10 +47,11 @@ function getTicketInfo(ticket_id) {
             $(".radio").buttonset("refresh");
         })
 }
-// getIssueInfo is called to update the ticket issuer info when someone clicks the ticket.
-// The information is in JSON format.
+// getIssueInfo is called to update the ticket issuer info when someone clicks the
+// ticket. The information is in JSON format.
 function getIssuerInfo(ticket_id) {
-    $.getJSON("<?php echo sanitizeHTML(BASE_URL);?>/tickets/ticketAJAX.php?ticket_id="
+    $.getJSON(
+        "<?php echo sanitizeHTML(BASE_URL);?>/tickets/ticketAJAX.php?ticket_id="
         +ticket_id+"&type=get_ticket",
         function(json){
             if (json.issuer_first_name != null && json.issuer_last_name != null) {
