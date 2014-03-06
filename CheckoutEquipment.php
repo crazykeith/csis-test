@@ -2,20 +2,9 @@ class CheckoutEquipment extends DBQueries
 {
     public $records = array();
     public $record_count;
-
-    /* getActiveCheckoutJTable($sort, $start, $page_size)
-     * Description:
-     *   Grabs a list of Active Equipment Checkouts specially formed for Jquery Jtable.
-     * Parameters:
-     *   $sort - The data column to sort by.
-     *   $start - The data record to start on. A limit of the search results.
-     *   $page_size - The amout of search results to return. A limit
-     *       of the search results.
-     * Sample Usage:
-     *   $results = CheckoutEquipment->getActiveCheckoutJTable("id", 10, 25);
-     * Return Arguement:
-     *   Returns an array of the current active equipment checkout records.
-     
+    
+    // getActiveCheckoutJTable retrieves a limited list of the current
+    // active checkout records and returns them in an array.
     function getActiveCheckoutJTable($sort, $start, $page_size) {
         $sql = "SELECT * FROM Buildings,Rooms,CheckoutEquipment
                 WHERE Buildings.id = Rooms.building_id
@@ -28,6 +17,8 @@ class CheckoutEquipment extends DBQueries
 
         return $this->records;
     }
+    // getCompletedCheckoutJTable retrieves a limited list of the
+    // completed checkout records and returns them in an array.
     function getCompletedCheckoutJTable($sort, $start, $page_size) {
         $sql = "SELECT * FROM Buildings,Rooms,CheckoutEquipment
                 WHERE Buildings.id = Rooms.building_id
@@ -47,6 +38,9 @@ class CheckoutEquipment extends DBQueries
 
         return $this->records;
     }
+    // getCheckoutCount gets a count of how many records there are so JTable
+    // can do paging properly. This function is called anytime the JTable loads
+    // so it can know how to page.
     function getCheckoutCount($status) {
         $search = array(
             'status' => $status
@@ -55,6 +49,9 @@ class CheckoutEquipment extends DBQueries
                 WHERE CheckoutEquipment.status = :status";
         $this->record_count = $this->selectQuery($sql,$search);
     }
+    // changeCheckoutRecord checks to see if the record has an 'id', if so
+    // it updates a previous record, if not, it inserts a new one. Then 
+    // returns an updated checkout list in an array.
     function changeCheckoutRecord($changes) {
         if (isset($changes['id'])) {
             $sql = "UPDATE CheckoutEquipment SET name = :name,
@@ -75,6 +72,8 @@ class CheckoutEquipment extends DBQueries
             return false;
         }
     }
+    // deleteCheckoutRecord deletes a checkout record. If successful,
+    // returns true, if it fails, returns false.
     function deleteCheckoutRecord($record_id) {
         $changes = array(
             'id' => $record_id
@@ -88,6 +87,8 @@ class CheckoutEquipment extends DBQueries
             return false;
         }
     }
+    // updatePDF simple updates the file location of the pdf associated
+    // with the checkout record.
     function updatePDF($file_name,$id) {
         $changes = array(
             'pdf'   => $file_name,
