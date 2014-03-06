@@ -1,3 +1,5 @@
+// getActiveTickets counts the number of tickets on the page, then checks the server
+// to see if they match. If they do, nothing happens, if they don't, the page reloads.
 function getActiveTickets() {
     $.post("<?php echo sanitizeHTML(BASE_URL);?>/tickets/ticketAJAX.php",{
         type: "get_active_ticket_count"
@@ -9,6 +11,9 @@ function getActiveTickets() {
     })
     setTimeout(arguments.callee, 30000);
 }
+// getTicketInfo grabs some of the ticket info from the server in JSON format
+// and updates the ticket. This function is called whenever certain things are
+// clicked.
 function getTicketInfo(ticket_id) {
     $("input[type=radio],input[type=checkbox]").prop('checked',false);
     $("#appt").hide();
@@ -40,6 +45,8 @@ function getTicketInfo(ticket_id) {
             $(".radio").buttonset("refresh");
         })
 }
+// getIssueInfo is called to update the ticket issuer info when someone clicks the ticket.
+// The information is in JSON format.
 function getIssuerInfo(ticket_id) {
     $.getJSON("<?php echo sanitizeHTML(BASE_URL);?>/tickets/ticketAJAX.php?ticket_id="
         +ticket_id+"&type=get_ticket",
@@ -61,4 +68,6 @@ function getIssuerInfo(ticket_id) {
             $("#edit-issuer-phone").val(json.issuer_phone);
         })
 }
+// This little function calls getActiveTickets every 30 seconds to make sure the
+// ticket page is up to date.
 setTimeout(getActiveTickets,30000);
