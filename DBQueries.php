@@ -11,10 +11,11 @@ class DBQueries
 		*   $sql - a string containing the SQL statement
 		*			customized for whatever purpose.
 		*   $search - a keyed array containing all of the
-		*			named parameters for the SQL statement
+		*		named parameters for the SQL statement
 		* Sample Usage:
 		*   $DB_class = new DBQueries;
-		*	$item_array = $DB_class->selectQuery("SELECT * FROM Buildings","");
+		*	$item_array = $DB_class->selectQuery(
+		*		"SELECT * FROM Buildings","");
 		* Return Argument:
 		*   returns a keyed array of the database query results.
 		*/
@@ -59,9 +60,11 @@ class DBQueries
 		*			parameters for the SQL statement
 		* Sample Usage:
 		*   $DB_class = new DBQueries;
-		*	$item_array = $DB_class->insertUpdateDeleteQuery($sql,$changes);
+		*	$item_array = $DB_class->insertUpdateDeleteQuery(
+		*		$sql,$changes);
 		* Return Argument:
-		*   returns a bool value of the success of the performed query.
+		*   returns a bool value of the success of the performed 
+		*   query.
 		*/
 	
 		$conn = new DBH();
