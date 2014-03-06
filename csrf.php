@@ -2,7 +2,8 @@ function insert_csrf_token()
 {
   /* insert_csrf_token()
     * Description:
-    *   Inserts a hashed token and time of request into the form to protect against CSRF.
+    *   Inserts a hashed token and time of request into the form to protect against
+    *    CSRF.
     * Parameters:
     *   None.
     * Sample Usage:
@@ -15,19 +16,22 @@ function insert_csrf_token()
     */
     $time = time();
     printf('<input type="hidden" value="%s" name="csrf_time">', $time);
-    printf('<input type="hidden" value="%s" name="csrf_token">', create_csrf_token($time));
+    printf('<input type="hidden" value="%s" name="csrf_token">'
+    		, create_csrf_token($time));
 }
 function create_csrf_token($time)
 {
 	/* create_csrf_token($time)
     * Description:
-    *   Creates a hashed token using the time provided, shibboleth's persistent id,
-	*	and a salt defined outside of the public domain (home/csis/.csis-config.php).
+    *   Creates a hashed token using the time provided, shibboleth's
+    *	persistent id, and a salt defined outside of the public domain 
+    *   (home/csis/.csis-config.php).
     * Parameters:
-    *   $time - either the current time from insert_csrf_token, or the time from the
-	*		posted form from check_csrf_token.
+    *   $time - either the current time from insert_csrf_token, or the time
+    *		from the posted form from check_csrf_token.
     * Sample Usage:
-    *   printf('<input type="hidden" value="%s" name="csrf_token">', create_csrf_token(time()));
+    *   printf('<input type="hidden" value="%s" name="csrf_token">'
+    *		, create_csrf_token(time()));
     * Return Argument:
     *   The sha1 hashed token using the time provided.
     */
@@ -41,7 +45,7 @@ function check_csrf_token()
 	/* check_csrf_token()
     * Description:
     *   Checks a posted token by creating a new token using the post time provided
-	*	and matching that value against the token that was passed with the form.
+    *	and matching that value against the token that was passed with the form.
     * Parameters:
     *   None.
     * Sample Usage:
