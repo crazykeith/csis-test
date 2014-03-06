@@ -1,6 +1,6 @@
 function insert_csrf_token()
 {
-  /* insert_csrf_token()
+   /* insert_csrf_token()
     * Description:
     *   Inserts a hashed token and time of request into the form to protect against
     *    CSRF.
@@ -8,9 +8,9 @@ function insert_csrf_token()
     *   None.
     * Sample Usage:
     *   <form action"">
-	*	<?php insert_csrf_token();?>
-	*		do stuff
-	*	</form>
+    *	<?php insert_csrf_token();?>
+    *		do stuff
+    *	</form>
     * Return Argument:
     *   Two hidden form inputs with the time and hashed token.
     */
@@ -21,7 +21,7 @@ function insert_csrf_token()
 }
 function create_csrf_token($time)
 {
-	/* create_csrf_token($time)
+   /* create_csrf_token($time)
     * Description:
     *   Creates a hashed token using the time provided, shibboleth's
     *	persistent id, and a salt defined outside of the public domain 
@@ -42,7 +42,7 @@ function create_csrf_token($time)
 }
 function check_csrf_token()
 {
-	/* check_csrf_token()
+   /* check_csrf_token()
     * Description:
     *   Checks a posted token by creating a new token using the post time provided
     *	and matching that value against the token that was passed with the form.
@@ -50,10 +50,10 @@ function check_csrf_token()
     *   None.
     * Sample Usage:
     *  if ($_POST['submit']) {
-	*		if (!check_csrf_token()) {
-	*			exit();
-	*		}
-	*	}
+    *		if (!check_csrf_token()) {
+    *			exit();
+    *		}
+    *	}
     * Return Argument:
     *   Returns true if the check passed, false if the check failed.
     */
