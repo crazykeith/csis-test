@@ -3,6 +3,19 @@ class CheckoutEquipment extends DBQueries
     public $records = array();
     public $record_count;
 
+    /* getActiveCheckoutJTable($sort, $start, $page_size)
+     * Description:
+     *   Grabs a list of Active Equipment Checkouts specially formed for Jquery Jtable.
+     * Parameters:
+     *   $sort - The data column to sort by.
+     *   $start - The data record to start on. A limit of the search results.
+     *   $page_size - The amout of search results to return. A limit
+     *       of the search results.
+     * Sample Usage:
+     *   $results = CheckoutEquipment->getActiveCheckoutJTable("id", 10, 25);
+     * Return Arguement:
+     *   Returns an array of the current active equipment checkout records.
+     
     function getActiveCheckoutJTable($sort, $start, $page_size) {
         $sql = "SELECT * FROM Buildings,Rooms,CheckoutEquipment
                 WHERE Buildings.id = Rooms.building_id
