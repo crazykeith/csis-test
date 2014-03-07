@@ -8,7 +8,8 @@ if (!function_exists("json_encode")) {
       $json = "$_indent";
 
       if ($options & JSON_NUMERIC_CHECK and is_string($var) and is_numeric($var)) {
-          $var = (strpos($var, ".") || strpos($var, "e")) ? floatval($var) : intval($var);
+          $var = (strpos($var, ".") 
+                  || strpos($var, "e")) ? floatval($var) : intval($var);
       }
 
       // add array entries
