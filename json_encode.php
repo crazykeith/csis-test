@@ -18,7 +18,8 @@ if (!function_exists("json_encode")) {
          if (!$obj) {
             $keys = array_keys((array)$var);
             
-            // keys must be in 0,1,2,3, ordering, but PHP treats integers==strings otherwise
+            // keys must be in 0,1,2,3, ordering, but PHP treats integers==strings
+            // otherwise
             $obj = !($keys == array_keys($keys));
          }
 
@@ -26,7 +27,8 @@ if (!function_exists("json_encode")) {
          $empty = 0; $json = "";
          foreach ((array)$var as $i=>$v) {
             $json .= ($empty++ ? ",$_nl" : "")
-                   . $_tab . ($obj ? (json_encode($i, $options, $_tab) . ":$_space") : "")
+                   . $_tab . ($obj ? (json_encode($i, $options, $_tab) 
+                           . ":$_space") : "")
                    . (json_encode($v, $options, $_tab));
          }
 
@@ -59,7 +61,8 @@ if (!function_exists("json_encode")) {
              "&"  => $options & JSON_HEX_AMP  ? "\\u0026" : "&",
          );
          $var = strtr($var, $rewrite);
-         //@COMPAT control chars should probably be stripped beforehand, not escaped as here
+         // @COMPAT control chars should probably be stripped beforehand,
+         // not escaped as here
          if (function_exists("iconv") && ($options & JSON_UNESCAPED_UNICODE) == 0) {
             $var = preg_replace("/[^\\x{0020}-\\x{007F}]/ue", "'\\u'.current(
                 unpack('H*', iconv('UTF-8', 'UCS-2BE', '$0')))", $var);
